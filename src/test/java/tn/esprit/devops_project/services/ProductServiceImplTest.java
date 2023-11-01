@@ -239,7 +239,7 @@ class ProductServiceImplTest {
 
     }
     @Test
-    public void testRetrieveProduct() {
+     void testRetrieveProduct() {
         Product expectedProduct = new Product();
         expectedProduct.setIdProduct(1L);
         when(mockproductRepository.findById(1L)).thenReturn(Optional.of(expectedProduct));
@@ -302,11 +302,11 @@ class ProductServiceImplTest {
     @Test
     void retrieveProductByCategory2() {
 
-        List<Product> electronicsProducts = productService.retrieveProductByCategory(ProductCategory.BOOKS);
+        List<Product> booksProducts = productService.retrieveProductByCategory(ProductCategory.BOOKS);
 
-        assertEquals(1, electronicsProducts.size());
-        assertThat(electronicsProducts).hasSize(1);
-        assertThat(electronicsProducts).allMatch(product -> product.getCategory() == ProductCategory.BOOKS);
+        assertThat(booksProducts)
+                .hasSize(1)
+                .allMatch(product -> product.getCategory() == ProductCategory.BOOKS);
     }
 
     @Test
@@ -325,8 +325,6 @@ class ProductServiceImplTest {
         when(mockproductRepository.findById(productId)).thenReturn(Optional.of(product));
         doNothing().when(mockproductRepository).delete(product);
         mockproductServicee.deleteProduct(productId);
-
-
 
     }
     @Test
