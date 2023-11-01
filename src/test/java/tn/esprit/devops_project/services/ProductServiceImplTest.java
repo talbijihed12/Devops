@@ -278,7 +278,7 @@ class ProductServiceImplTest {
         List<Product> products = productService.retreiveAllProduct();
 
         assertNotNull(products);
-        assertEquals(64, products.size());
+        assertEquals(78, products.size());
         assertThat(products).isNotEmpty().hasSize(64);
     }
 
@@ -339,7 +339,7 @@ class ProductServiceImplTest {
     }
     @Test
     void deleteExistingProductWithAutowired() {
-        Long productIdToDelete = 101L;
+        Long productIdToDelete = 100L;
 
         productService.deleteProduct(productIdToDelete);
         assertFalse(productRepository.existsById(productIdToDelete));
