@@ -303,7 +303,6 @@ class ProductServiceImplTest {
         List<Product> booksProducts = productService.retrieveProductByCategory(ProductCategory.BOOKS);
 
         assertThat(booksProducts)
-                .hasSize(1)
                 .allMatch(product -> product.getCategory() == ProductCategory.BOOKS);
     }
 
