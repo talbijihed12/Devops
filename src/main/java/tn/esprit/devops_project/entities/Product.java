@@ -29,4 +29,8 @@ public class Product implements Serializable {
     public Product(String s, double v, int i, ProductCategory productCategory) {
 
     }
+
+    public Product(long l, String s, double v, int i, ProductCategory productCategory) {
+
+    }
 }
