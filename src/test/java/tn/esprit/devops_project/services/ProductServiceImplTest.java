@@ -346,12 +346,15 @@ class ProductServiceImplTest {
 
     @Test
     void retreiveProductStock() {
-        Long stockId = 1L;
-        Stock existingStock = stockRepositoryy.findById(stockId).orElse(null);
+        Stock stock =new Stock();
+        stock.setIdStock(1L);
+        stock.setTitle("jihed");
+        stockService.addStock(stock);
+        Stock existingStock = stockRepositoryy.findById(stock.getIdStock()).orElse(null);
 
         assertNotNull(existingStock);
 
-        List<Product> products = productRepository.findByStockIdStock(stockId);
+        List<Product> products = productRepository.findByStockIdStock(stock.getIdStock());
         System.out.println(products);
 
         assertFalse(products.isEmpty());
