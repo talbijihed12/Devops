@@ -5,6 +5,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.devops_project.entities.Product;
 import tn.esprit.devops_project.entities.ProductCategory;
@@ -21,7 +22,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.config.name=application-test")
+@ActiveProfiles
 class ProductServiceImplTest {
 
     @Mock
@@ -45,9 +47,11 @@ class ProductServiceImplTest {
 
     @Test
     void testAddProduct() {
-        Long existingStockId = 1L;
-
-        Stock existingStock = stockRepositoryy.findById(existingStockId)
+        Stock stock=new Stock();
+        stock.setIdStock(1L);
+        stock.setTitle("jihed");
+        stockService.addStock(stock);
+        Stock existingStock = stockRepositoryy.findById(stock.getIdStock())
                 .orElseThrow(() -> new RuntimeException("stock not found"));
         Product product = new Product();
         product.setTitle("products");
@@ -55,13 +59,13 @@ class ProductServiceImplTest {
         product.setQuantity(10);
         product.setCategory(ProductCategory.ELECTRONICS);
         product.setStock(existingStock);
-        Product addedProduct = productService.addProduct(product, existingStockId);
+        Product addedProduct = productService.addProduct(product, stock.getIdStock());
         assertNotNull(addedProduct.getIdProduct(), "Product id should not be null");
         assertEquals("products", addedProduct.getTitle(), "product title is incorrect");
         assertEquals(19.99f, addedProduct.getPrice(), 0.01, "Product price is incorrect");
         assertEquals(10, addedProduct.getQuantity(), "Product quantity is incorrect");
         assertEquals(ProductCategory.ELECTRONICS, addedProduct.getCategory(), "Product category is incorrect");
-        assertEquals(existingStockId, addedProduct.getStock().getIdStock(), "Product should be associated with the correct stock");
+        assertEquals(stock.getIdStock(), addedProduct.getStock().getIdStock(), "Product should be associated with the correct stock");
     }
     @Test
     void testAddProduct2(){
