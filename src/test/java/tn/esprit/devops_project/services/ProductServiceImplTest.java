@@ -330,7 +330,7 @@ class ProductServiceImplTest {
     }
     @Test
     void deleteProductWithAutowired1() {
-        Product product = new Product("Product 1", 100.0, 10, ProductCategory.ELECTRONICS);
+        Product product = new Product("Product 1", 100.0f, 10, ProductCategory.ELECTRONICS);
         productRepository.save(product);
          productService.deleteProduct(product.getIdProduct());
 
@@ -338,7 +338,7 @@ class ProductServiceImplTest {
     }
     @Test
     void deleteExistingProductWithAutowired() {
-        Product product = new Product(100L,"Product 1", 100.0, 10, ProductCategory.ELECTRONICS);
+        Product product = new Product(100L,"Product 1", 100.0f, 10, ProductCategory.ELECTRONICS);
         productService.addProduct(product,1L);
         productService.deleteProduct(product.getIdProduct());
         assertFalse(productRepository.existsById(product.getIdProduct()));

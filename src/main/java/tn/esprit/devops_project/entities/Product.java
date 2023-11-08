@@ -26,17 +26,22 @@ public class Product implements Serializable {
     @JsonIgnore
     Stock stock;
 
-    public Product(String s, double v, int i, ProductCategory productCategory) {
-        // This constructor is intentionally left empty, as there is no specific logic to perform.
-        // If specific initialization is needed, it should be added in the future.
-        // Alternatively, you can throw an UnsupportedOperationException if this constructor should not be used.
-        // throw new UnsupportedOperationException("This constructor is not supported.");
+    public Product(String s, float v, int i, ProductCategory productCategory) {
+        this.title=s;
+        this.price=v;
+        this.quantity=i;
+        this.category=productCategory;
+
+
+
     }
 
-    public Product(long l, String s, double v, int i, ProductCategory productCategory) {
-        // This constructor is intentionally left empty, as there is no specific logic to perform.
-        // If specific initialization is needed, it should be added in the future.
-        // Alternatively, you can throw an UnsupportedOperationException if this constructor should not be used.
-        // throw new UnsupportedOperationException("This constructor is not supported.");
+    public Product(long l, String s, float v, int i, ProductCategory productCategory) {
+        this.idProduct=l;
+        this.title=s;
+        this.price=v;
+        this.quantity=i;
+        this.category=productCategory;
+
     }
 }
