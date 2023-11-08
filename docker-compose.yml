@@ -28,6 +28,8 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/devops
       - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - mynetwork
 
 
 
