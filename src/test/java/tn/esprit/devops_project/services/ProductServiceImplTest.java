@@ -304,28 +304,28 @@ class ProductServiceImplTest {
     @Test
     void retrieveProductByCategory2() {
 
-        List<Product> booksProducts = productService.retrieveProductByCategory(ProductCategory.BOOKS);
+        List<Product> booksProducts = productService.retrieveProductByCategory(ProductCategory.ELECTRONICS);
 
         assertThat(booksProducts)
-                .allMatch(product -> product.getCategory() == ProductCategory.BOOKS);
+                .isNotEmpty()
+                .allMatch(product -> product.getCategory() == ProductCategory.ELECTRONICS);
     }
 
     @Test
     void deleteProduct() {
-        Long productId = 1L;
 
         Stock stock = new Stock();
         stock.setTitle("Stock");
         stock.setIdStock(1L);
         mockstockService.addStock(stock);
         Product product = new Product();
-        product.setIdProduct(productId);
+        product.setIdProduct(1L);
         product.setStock(stock);
         when(mockstockRepository.findById(1L)).thenReturn(Optional.of(stock));
-        mockproductServicee.addProduct(product,stock.getIdStock());
-        when(mockproductRepository.findById(productId)).thenReturn(Optional.of(product));
-        doNothing().when(mockproductRepository).delete(product);
-        mockproductServicee.deleteProduct(productId);
+        mockproductServicee.addProduct(product, stock.getIdStock());
+        mockproductServicee.deleteProduct(product.getIdProduct());
+        Optional<Product> deletedProduct = mockproductRepository.findById(product.getIdProduct());
+        assertFalse(deletedProduct.isPresent());
 
     }
     @Test
